@@ -1,0 +1,596 @@
+import React from "react";
+import { motion } from "framer-motion";
+import {
+  Mail,
+  Instagram,
+  Music,
+  Mic,
+  Headphones,
+  Building2,
+  CircleDollarSign,
+  MessageSquare,
+  ExternalLink,
+  ChevronRight,
+} from "lucide-react";
+
+const featuredWorks = [
+  {
+    title: "プランプラム – まあるいおねがい",
+    type: "Album / Recording, Mixing",
+  },
+  {
+    title: "CISSE – ROCK KIDS DAYDREAM",
+    type: "Album / Recording, Mixing",
+  },
+  {
+    title: "サカナノメ – ツナ缶2合",
+    type: "Album / Recording, Mixing",
+  },
+  {
+    title: "ハズレチ – 春あらし",
+    type: "Single / Mixing",
+  },
+  {
+    title: "五箇山和紙×アニメーション！伝統が未来へつながる瞬間",
+    type: "Movie / MA",
+    link: "https://www.youtube.com/watch?v=SkTZSsj7HgM",
+  },
+  {
+    title: "福井県 森フェス",
+    type: "Live Event / PA",
+  },
+];
+
+const musicWorks = [
+  {
+    role: "Rec / Mix / Master",
+    artists: [
+      "プランプラム（the U、三十一、ビッグバンに乗って、然らば風の人、Lovers on Monday、メモリーをうたえば）",
+      "サカナノメ（また明日、グッバイイエロー、8月病、口約束）",
+      "ラフアライト（日々を過ごす、命燃やして）",
+      "Flux-As（04、ナイトスカイ）",
+      "CONY（金木犀、月とブリキ）",
+      "仄現（KICK、逃げ出したい夜に、worker、涙の栞、大人にはならない、ネイビー、car stereo）",
+      "Makotosan（青い雪、赤いうさぎ、白い空）",
+      "Arcy cat（結露、時として）",
+      "microphone motors（923、Bullshit、dogs、flexy、scratch）",
+      "シープライズ（離れてもまた）",
+      "メランコリーハイ（そらごと）",
+      "SoundsError（Eternity）",
+      "BootyCheek（ジャガー・ショー）",
+      "akarisaki（いつか、Evergreen）",
+      "SIKKE（help!!、My Room Waltz、adieu、向日葵）",
+      "CISSE（DAYDREAMKIDS）",
+      "サスティーンズ（白紙、終バスとイヤホン）",
+      "ヤスヒロリキ（金曜日）",
+      "Haunt（lost）",
+      "イフカ（レコード）",
+      "Celltone（セカンドパラレル、烈光）",
+      "他",
+    ],
+  },
+  {
+    role: "Mix",
+    artists: ["ハズレチ（何者、青のプロローグ、春あらし）", "携帯ピコ（つきめ、トーマス）"],
+  },
+];
+
+const prices = [
+  { label: "レコーディング 14時間", value: "55,000円" },
+  { label: "レコーディング 8時間", value: "38,500円" },
+  { label: "Mix", value: "1曲 22,000円" },
+  { label: "Mastering", value: "1曲 5,500円" },
+  { label: "PA（機材込み）", value: "1日 55,000円" },
+  { label: "PA（オペレートのみ）", value: "1日 27,500円 + 交通費" },
+  { label: "MA", value: "15秒CM 16,500円" },
+  { label: "音声", value: "1日 27,500円〜" },
+];
+
+const faqItems = [
+  {
+    q: "初めてでも依頼できますか？",
+    a: "もちろんです。何度かやり取りをしながら、内容や予算に合わせて最適な進め方を一緒に考えていきます。",
+  },
+  {
+    q: "修正は何回まで可能ですか？",
+    a: "ミックスの無料修正は3回までです。それ以降の修正は1回 5,500円にて対応しています。",
+  },
+  {
+    q: "宿泊は何人まで可能ですか？",
+    a: "宿泊施設ピチカートは最大15人まで宿泊可能です。1人部屋が1つ、2人部屋が2つ、大部屋が1つあります。",
+  },
+  {
+    q: "レコーディング前に何を準備すればいいですか？",
+    a: "曲名、曲数、録りたい楽器、キー、BPM、デモ、歌詞、構成譜のご準備をお願いしています。詳しくはYouTubeでも解説予定です。",
+  },
+];
+
+const contactGuides = [
+  "お名前",
+  "メールアドレス",
+  "電話番号（必要に応じて）",
+  "ご希望の内容（Recording / Mix / Mastering / PA / MA / 音声）",
+  "日程または納期",
+  "わかる範囲の詳細情報",
+];
+
+const estimateTemplate = [
+  "日程",
+  "人数",
+  "ご依頼内容",
+  "宿泊の有無",
+  "会場や公開媒体",
+  "その他詳細",
+];
+
+const consultTemplate = [
+  "何を依頼すればいいかわからない",
+  "予算の中でできることを相談したい",
+  "初めてのレコーディングで流れを知りたい",
+  "プラン外の内容を相談したい",
+];
+
+function SectionTitle({ icon: Icon, eyebrow, title, description }) {
+  return (
+    <div className="mb-8">
+      <div className="mb-3 flex items-center gap-2 text-sm font-medium uppercase tracking-[0.2em] text-zinc-500">
+        <Icon className="h-4 w-4" />
+        <span>{eyebrow}</span>
+      </div>
+      <h2 className="text-3xl font-semibold tracking-tight text-zinc-950 sm:text-4xl">{title}</h2>
+      {description && <p className="mt-3 max-w-3xl text-base leading-7 text-zinc-600">{description}</p>}
+    </div>
+  );
+}
+
+function Card({ children, className = "" }) {
+  return <div className={`rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm ${className}`}>{children}</div>;
+}
+
+export default function KMKPortfolioSite() {
+  return (
+    <div className="min-h-screen bg-zinc-50 text-zinc-900">
+      <header className="sticky top-0 z-30 border-b border-zinc-200/80 bg-zinc-50/90 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+          <div>
+            <div className="text-sm text-zinc-500">KMK Recording Service</div>
+            <div className="text-lg font-semibold">加茂 弘祐</div>
+          </div>
+          <nav className="hidden gap-5 text-sm text-zinc-600 md:flex">
+            {[
+              ["Home", "#home"],
+              ["Works", "#works"],
+              ["About", "#about"],
+              ["Studio", "#studio"],
+              ["Price", "#price"],
+              ["FAQ", "#faq"],
+              ["Contact", "#contact"],
+            ].map(([label, href]) => (
+              <a key={label} href={href} className="transition hover:text-zinc-950">
+                {label}
+              </a>
+            ))}
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <section id="home" className="mx-auto grid max-w-7xl gap-8 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:px-8 lg:py-24">
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+            <p className="mb-4 text-sm font-medium uppercase tracking-[0.24em] text-zinc-500">Recording / Mixing / Mastering / PA / MA / Location Sound</p>
+            <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-zinc-950 sm:text-5xl lg:text-6xl">
+              音はコミュニケーションから始まる
+            </h1>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-600">
+              レコーディング、ミックス、マスタリング、PA、MA、現場音声など、幅広い音響業務に対応しています。
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 rounded-2xl bg-zinc-950 px-5 py-3 text-sm font-medium text-white transition hover:opacity-90"
+              >
+                お問い合わせ
+                <ChevronRight className="h-4 w-4" />
+              </a>
+              <a
+                href="#works"
+                className="inline-flex items-center gap-2 rounded-2xl border border-zinc-300 px-5 py-3 text-sm font-medium text-zinc-800 transition hover:bg-white"
+              >
+                実績を見る
+              </a>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.08 }}
+            className="grid gap-4"
+          >
+            <Card className="flex min-h-[360px] items-center justify-center bg-zinc-100">
+              <div className="text-center text-zinc-500">
+                <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full border border-dashed border-zinc-400">
+                  <Mic className="h-6 w-6" />
+                </div>
+                <p className="text-sm">ここに顔写真 または SSL卓の写真を配置</p>
+              </div>
+            </Card>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <Card>
+                <div className="text-sm text-zinc-500">拠点</div>
+                <div className="mt-1 font-medium">中ノ峠ミュージック・ラボ / 石川県小松市</div>
+              </Card>
+              <Card>
+                <div className="text-sm text-zinc-500">主な分野</div>
+                <div className="mt-1 font-medium">Band Recording / Mixing / PA / MA</div>
+              </Card>
+            </div>
+          </motion.div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
+          <Card>
+            <div className="mb-5 flex items-center justify-between gap-4">
+              <div>
+                <div className="text-sm uppercase tracking-[0.2em] text-zinc-500">Featured Works</div>
+                <div className="mt-1 text-2xl font-semibold">代表実績</div>
+              </div>
+              <a href="#works" className="hidden text-sm font-medium text-zinc-700 hover:text-zinc-950 sm:block">
+                すべて見る
+              </a>
+            </div>
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {featuredWorks.map((work) => (
+                <div key={work.title} className="rounded-2xl border border-zinc-200 p-4">
+                  <div className="text-sm text-zinc-500">{work.type}</div>
+                  <div className="mt-2 font-medium leading-7">{work.title}</div>
+                  {work.link && (
+                    <a
+                      href={work.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-3 inline-flex items-center gap-2 text-sm text-zinc-700 hover:text-zinc-950"
+                    >
+                      Link <ExternalLink className="h-4 w-4" />
+                    </a>
+                  )}
+                </div>
+              ))}
+            </div>
+          </Card>
+        </section>
+
+        <section id="works" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+          <SectionTitle
+            icon={Music}
+            eyebrow="Works"
+            title="音源実績 / 映像実績"
+            description="Recording / Mixing / Mastering を中心に、音源制作・映像音声・PAの実績を掲載しています。"
+          />
+          <div className="grid gap-6 lg:grid-cols-[2fr_1fr]">
+            <Card>
+              <div className="mb-6 text-xl font-semibold">音源実績</div>
+              <div className="space-y-6">
+                {musicWorks.map((group) => (
+                  <div key={group.role}>
+                    <div className="mb-3 inline-flex rounded-full bg-zinc-100 px-3 py-1 text-sm font-medium text-zinc-700">
+                      {group.role}
+                    </div>
+                    <div className="space-y-3 text-sm leading-7 text-zinc-700">
+                      {group.artists.map((artist) => (
+                        <div key={artist}>{artist}</div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Card>
+
+            <div className="grid gap-6">
+              <Card>
+                <div className="mb-4 text-xl font-semibold">映像 / MA</div>
+                <div className="text-sm text-zinc-500">Movie / MA</div>
+                <div className="mt-2 font-medium leading-7">
+                  五箇山和紙×アニメーション！伝統が未来へつながる瞬間
+                </div>
+                <div className="mt-4 text-sm leading-7 text-zinc-600">
+                  Gokayama Washi × Animation! Bringing Ancient Tradition into the Future
+                </div>
+                <a
+                  href="https://www.youtube.com/watch?v=SkTZSsj7HgM"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-5 inline-flex items-center gap-2 rounded-2xl border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-800 hover:bg-zinc-50"
+                >
+                  YouTubeで見る
+                  <ExternalLink className="h-4 w-4" />
+                </a>
+              </Card>
+
+              <Card>
+                <div className="mb-4 text-xl font-semibold">PA</div>
+                <div className="text-sm text-zinc-500">Live Event / PA</div>
+                <div className="mt-2 font-medium">福井県 森フェス</div>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        <section id="about" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+          <SectionTitle
+            icon={Headphones}
+            eyebrow="About"
+            title="加茂 弘祐について"
+            description="音と人のあいだにある温度感まで含めて、心地よい制作環境を目指しています。"
+          />
+          <div className="grid gap-6 lg:grid-cols-2">
+            <Card>
+              <div className="mb-4 text-xl font-semibold">経歴</div>
+              <div className="space-y-3 leading-7 text-zinc-700">
+                <p>1996年5月3日生まれ。</p>
+                <p>2016年よりフリーダムスタジオにて研鑽を積む。</p>
+                <p>2018年よりパワーハウススタジオにてさらに経験を重ねる。</p>
+                <p>2022年以降、中ノ峠ミュージック・ラボのエンジニア、管理人を担当。</p>
+              </div>
+            </Card>
+
+            <Card>
+              <div className="mb-4 text-xl font-semibold">得意ジャンル</div>
+              <p className="leading-7 text-zinc-700">
+                Rock、Pop、バンドサウンドを中心とした案件を多く担当しています。その一方で、ジャンルにとらわれず、楽曲ごとに最適な音作りを目指しています。
+              </p>
+            </Card>
+
+            <Card>
+              <div className="mb-4 text-xl font-semibold">音への考え方</div>
+              <div className="space-y-4 leading-7 text-zinc-700">
+                <p>
+                  レコーディングは長い時間を同じ空間で過ごすからこそ、息苦しさのない、安心して集中できる空気づくりを大切にしています。
+                </p>
+                <p>
+                  ミュージシャンがどんな作品を作りたいのか、どんなイメージを持っているのかを丁寧に汲み取り、認識のずれが生まれないようコミュニケーションを重ねながら制作を進めます。
+                </p>
+                <p>
+                  PAやMAにおいても、主催者やディレクターがそのイベントや作品に込めた意図を考えたうえで、自分の個性も活かしながら、より良い形を目指しています。
+                </p>
+                <p>どの仕事でも、人が聴いて心地よいと感じられるものを作りたいと考えています。</p>
+              </div>
+            </Card>
+
+            <Card>
+              <div className="mb-4 text-xl font-semibold">仕事のスタンス</div>
+              <div className="space-y-4 leading-7 text-zinc-700">
+                <p>
+                  初めての方から経験豊富な方まで、どなたでも気軽にご相談いただけたら嬉しいです。初心者の方には安心して頼れる存在として、経験のある方には心地よく制作に集中できる環境として、信頼していただける仕事を目指しています。
+                </p>
+                <p>
+                  私は柔らかく落ち着いた人柄ですが、文章だけでは伝わりにくい部分もあると思います。雰囲気が気になる方は、ぜひYouTubeチャンネルもご覧ください。
+                </p>
+                <p>
+                  スタジオや録音の現場に少し敷居の高さを感じている方にも、安心して相談していただけるよう心がけています。内容や予算、進め方も含めて一緒に考えながら、その人に合った形で制作を進めていきます。
+                </p>
+              </div>
+            </Card>
+          </div>
+        </section>
+
+        <section id="studio" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+          <SectionTitle
+            icon={Building2}
+            eyebrow="Studio"
+            title="中ノ峠ミュージック・ラボ"
+            description="山の空気と宿泊環境に包まれながら、集中して音楽制作に向き合える場所です。"
+          />
+          <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+            <Card>
+              <div className="space-y-4 leading-7 text-zinc-700">
+                <p>
+                  中ノ峠ミュージック・ラボは、涼しい山中にあるリゾートレコーディングスタジオです。広いコントロールルームにはSSL 4000Eを設置し、約40畳のブースではゆったりとした空間でレコーディングに没頭できます。
+                </p>
+                <p>
+                  宿泊施設へは建物の外に出ることなく直接行き来でき、集中して音楽制作にのめり込むのにぴったりの環境です。
+                </p>
+                <p>
+                  宿泊施設ピチカートは、最大15人まで宿泊できる広々とした貸切型の宿泊施設です。キッチンも完備しているため、食材を持ち込んで自分たちで料理を楽しむこともできます。
+                </p>
+                <p>
+                  周囲には豊かな自然が広がっており、涼しい山の中でのびのびとリラックスしながら制作に向き合えます。
+                </p>
+              </div>
+            </Card>
+
+            <div className="grid gap-6">
+              <Card className="min-h-[220px] bg-zinc-100 flex items-center justify-center">
+                <div className="text-center text-zinc-500">
+                  <div className="mb-2 text-sm">スタジオ写真エリア</div>
+                  <div className="text-xs">コントロールルーム / ブース / 宿泊施設など</div>
+                </div>
+              </Card>
+              <Card>
+                <div className="mb-4 text-xl font-semibold">設備</div>
+                <p className="text-sm leading-7 text-zinc-600">
+                  機材表PDFは後から差し替え可能です。ここに「機材表をダウンロード」ボタンを設置できます。
+                </p>
+                <button className="mt-4 rounded-2xl border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-800">
+                  機材表PDF（準備中）
+                </button>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        <section id="price" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+          <SectionTitle
+            icon={CircleDollarSign}
+            eyebrow="Price"
+            title="料金"
+            description="内容によって前後する場合があります。まずはお気軽にご相談ください。"
+          />
+          <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+            <Card>
+              <div className="mb-4 text-xl font-semibold">料金の考え方</div>
+              <div className="space-y-4 leading-7 text-zinc-700">
+                <p>
+                  料金は、作業時間・人数・必要機材・納品形式・宿泊の有無などによって変動します。できるだけわかりやすいよう主要な料金を掲載していますが、内容に応じて最適なご提案をいたします。
+                </p>
+                <p>
+                  初めての方や、何を選べばよいかわからない方もご安心ください。ご相談をもとに内容を整理しながら進めていきます。
+                </p>
+              </div>
+            </Card>
+
+            <Card>
+              <div className="mb-4 text-xl font-semibold">各事業の主要料金</div>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {prices.map((price) => (
+                  <div key={price.label} className="rounded-2xl border border-zinc-200 p-4">
+                    <div className="text-sm text-zinc-500">{price.label}</div>
+                    <div className="mt-1 text-lg font-semibold">{price.value}</div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-6 rounded-2xl bg-zinc-100 p-4 text-sm leading-7 text-zinc-700">
+                ミックスの無料修正は3回までです。それ以降は1回 5,500円にて対応しています。詳細な料金表はPDFでも掲載可能です。
+              </div>
+              <div className="mt-5 flex flex-wrap gap-3">
+                <button className="rounded-2xl border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-800">
+                  詳細料金表PDF（準備中）
+                </button>
+                <a href="#contact" className="rounded-2xl bg-zinc-950 px-4 py-2 text-sm font-medium text-white">
+                  見積りを相談する
+                </a>
+              </div>
+            </Card>
+          </div>
+        </section>
+
+        <section id="faq" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+          <SectionTitle
+            icon={MessageSquare}
+            eyebrow="FAQ / 依頼例"
+            title="よくある質問"
+            description="初めての方にもわかりやすいよう、よくあるご質問や依頼の考え方をまとめています。"
+          />
+          <div className="grid gap-4">
+            {faqItems.map((item) => (
+              <Card key={item.q}>
+                <div className="text-lg font-semibold">Q. {item.q}</div>
+                <p className="mt-3 leading-7 text-zinc-700">A. {item.a}</p>
+              </Card>
+            ))}
+            <Card>
+              <div className="text-lg font-semibold">参考リンク</div>
+              <p className="mt-3 leading-7 text-zinc-700">
+                構成譜の書き方など、依頼前の準備に役立つ内容は YouTube チャンネルでも発信予定です。
+              </p>
+              <a
+                href="https://www.youtube.com/@KMKrecordingservice"
+                target="_blank"
+                rel="noreferrer"
+                className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-zinc-800 hover:text-zinc-950"
+              >
+                YouTube チャンネルを見る
+                <ExternalLink className="h-4 w-4" />
+              </a>
+            </Card>
+          </div>
+        </section>
+
+        <section id="contact" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+          <SectionTitle
+            icon={Mail}
+            eyebrow="Contact"
+            title="お問い合わせ"
+            description="お見積り・ご相談・その他のお問い合わせはこちらからどうぞ。"
+          />
+          <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
+            <div className="grid gap-6">
+              <Card>
+                <div className="mb-4 text-xl font-semibold">連絡先</div>
+                <div className="space-y-4 text-sm text-zinc-700">
+                  <a href="mailto:kamo.kousuke@gmail.com" className="flex items-center gap-3 hover:text-zinc-950">
+                    <Mail className="h-4 w-4" />
+                    kamo.kousuke@gmail.com
+                  </a>
+                  <a href="https://x.com/kamo_kousuke" target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-zinc-950">
+                    <ExternalLink className="h-4 w-4" />
+                    X: @kamo_kousuke
+                  </a>
+                  <a href="https://www.instagram.com/kamo.kousuke" target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-zinc-950">
+                    <Instagram className="h-4 w-4" />
+                    Instagram: @kamo.kousuke
+                  </a>
+                </div>
+              </Card>
+
+              <Card>
+                <div className="mb-4 text-xl font-semibold">依頼時に送ってほしい内容</div>
+                <ul className="space-y-2 text-sm leading-7 text-zinc-700">
+                  {contactGuides.map((item) => (
+                    <li key={item}>・{item}</li>
+                  ))}
+                </ul>
+              </Card>
+            </div>
+
+            <div className="grid gap-6">
+              <Card>
+                <div className="mb-3 text-xl font-semibold">お見積り</div>
+                <p className="text-sm leading-7 text-zinc-600">
+                  料金のお見積りをご希望の方はこちらからお問い合わせください。日程、内容、人数などをもとに、できるだけ具体的にご案内いたします。
+                </p>
+                <div className="mt-4 rounded-2xl bg-zinc-100 p-4">
+                  <div className="mb-2 text-sm font-medium text-zinc-800">必要項目の例</div>
+                  <ul className="space-y-1 text-sm text-zinc-700">
+                    {estimateTemplate.map((item) => (
+                      <li key={item}>・{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </Card>
+
+              <Card>
+                <div className="mb-3 text-xl font-semibold">ご相談</div>
+                <p className="text-sm leading-7 text-zinc-600">
+                  プランに当てはまらないご相談や、何をどう依頼すればよいかわからない方はこちらからご相談ください。初めての方にもわかりやすく、一緒に整理しながら進めていきます。
+                </p>
+                <div className="mt-4 rounded-2xl bg-zinc-100 p-4">
+                  <div className="mb-2 text-sm font-medium text-zinc-800">こんな相談が可能です</div>
+                  <ul className="space-y-1 text-sm text-zinc-700">
+                    {consultTemplate.map((item) => (
+                      <li key={item}>・{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </Card>
+
+              <Card>
+                <div className="mb-3 text-xl font-semibold">問い合わせテンプレート</div>
+                <div className="rounded-2xl bg-zinc-950 p-4 text-sm leading-7 text-zinc-100">
+                  <p>【共通】</p>
+                  <p>お名前 / メールアドレス / 電話番号（必要に応じて）</p>
+                  <br />
+                  <p>【Recording】</p>
+                  <p>日付 / 時間 / 録りたい楽器 / 曲数 / 宿泊の有無 / 泊数 / 人数</p>
+                  <br />
+                  <p>【Mix】</p>
+                  <p>曲名 / キー・BPM / 歌詞 / 納品形式 / 納品期限 / リファレンス曲</p>
+                </div>
+              </Card>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer className="border-t border-zinc-200 bg-white">
+        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-8 text-sm text-zinc-500 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+          <div>
+            <div className="font-medium text-zinc-800">KMK Recording Service</div>
+            <div>加茂 弘祐</div>
+          </div>
+          <div>© KMK Recording Service</div>
+        </div>
+      </footer>
+    </div>
+  );
+}
