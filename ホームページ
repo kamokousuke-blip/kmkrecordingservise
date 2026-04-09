@@ -179,7 +179,7 @@ export default function KMKPortfolioSite() {
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             <p className="mb-4 text-sm font-medium uppercase tracking-[0.24em] text-zinc-500">Recording / Mixing / Mastering / PA / MA / Location Sound</p>
             <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-zinc-950 sm:text-5xl lg:text-6xl">
-              音はコミュニケーションから始まるわ
+              音はコミュニケーションから始まる
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-600">
               レコーディング、ミックス、マスタリング、PA、MA、現場音声など、幅広い音響業務に対応しています。
@@ -212,7 +212,7 @@ export default function KMKPortfolioSite() {
                 <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full border border-dashed border-zinc-400">
                   <Mic className="h-6 w-6" />
                 </div>
-                <p className="text-sm">ここに顔写真 または SSL卓の写真を配置</p>
+                <p className="text-sm">ここに顔写真 または SSL卓の写真を配置する</p>
               </div>
             </Card>
             <div className="grid gap-4 sm:grid-cols-2">
