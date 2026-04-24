@@ -453,29 +453,27 @@ footer{background:var(--paper-warm)}
           <p>周囲には豊かな自然が広がっており、涼しい山の中でのびのびとリラックスしながら制作に向き合えます。</p>
         </div>
       </div>
-      <div class="side-stack">
-       <div class="studio-img">
-  <div class="photo-slider">
-    <div class="slider-track">
-      <img src="images/studio-01.jpg" alt="中ノ峠ミュージック・ラボのコントロールルーム">
-      <img src="images/studio-02.jpg" alt="中ノ峠ミュージック・ラボのメインブース">
-      <img src="images/studio-03.jpg" alt="中ノ峠ミュージック・ラボのSSLコンソール">
-    </div>
-
-    <button class="slider-btn slider-prev" type="button">‹</button>
-    <button class="slider-btn slider-next" type="button">›</button>
-  </div>
-</div>
-
-        <div class="studio-card">
-          <div class="card-title" style="font-family:var(--serif);font-size:1.1rem;margin-bottom:.75rem">設備</div>
-          <div style="font-size:13px;color:var(--ink-mid);line-height:1.7">機材表はこちらからご確認ください。</div>
-          <a href="#" class="pdf-btn">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            機材表PDF（準備中）
-          </a>
-        </div>
-      </div>
+       <div class="side-stack">
+             <div class="studio-img">
+               <div class="photo-slider">
+                <div class="slider-track">
+                  <img src="studio_pct1_Control Room.jpg" alt="中ノ峠ミュージック・ラボのコントロールルーム">
+                  <img src="studio_pct2_Main Booth.jpg" alt="中ノ峠ミュージック・ラボのメインブース">
+                  <img src="studio_pct3_Sound Lock.jpg" alt="中ノ峠ミュージック・ラボのサウンドロック">
+                 </div>
+                <button class="slider-btn slider-prev" type="button">‹</button>
+                <button class="slider-btn slider-next" type="button">›</button>
+               </div>
+            </div>
+           <div class="studio-card">
+             <div class="card-title" style="font-family:var(--serif);font-size:1.1rem;margin-bottom:.75rem">設備</div>
+             <div style="font-size:13px;color:var(--ink-mid);line-height:1.7">機材表はこちらからご確認ください。</div>
+             <a href="#" class="pdf-btn">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+               機材表PDF（準備中）
+             </a>
+          </div>
+       </div>
     </div>
   </div>
 </section>
@@ -501,9 +499,16 @@ footer{background:var(--paper-warm)}
        <div class="cottage-img">
   <div class="photo-slider">
     <div class="slider-track">
-      <img src="images/cottage-01.jpg" alt="宿泊施設ピチカートの外観">
-      <img src="images/cottage-02.jpg" alt="宿泊施設ピチカートのリビング">
-      <img src="images/cottage-03.jpg" alt="宿泊施設ピチカートの客室">
+      <img src="pichicart01_Lobby" alt="宿泊施設ピチカートのロビー1">
+      <img src="pichicart02_Lobby" alt="宿泊施設ピチカートのロビー2">
+      <img src="pichicart03_Lobby" alt="宿泊施設ピチカートのロビー3">
+      <img src="pichicart04_Large room.jpg" alt="宿泊施設ピチカートの大部屋">
+      <img src="pichicart05_Kitchin.jpg" alt="宿泊施設ピチカートのキッチン">
+      <img src="pichicart06_BathRoom.jpg" alt="宿泊施設ピチカートのバスルーム">
+      <img src="pichicart07_washroom.jpg" alt="宿泊施設ピチカートの洗面所">
+      <img src="pichicart08_Single room.jpg" alt="宿泊施設ピチカートの1人部屋">
+      <img src="pichicart09_Double room1.jpg" alt="宿泊施設ピチカートの2人部屋1">
+      <img src="pichicart09_Double room2.jpg" alt="宿泊施設ピチカートの2人部屋2">
     </div>
 
     <button class="slider-btn slider-prev" type="button">‹</button>
@@ -701,6 +706,68 @@ footer{background:var(--paper-warm)}
     <div class="footer-copy">© KMK Recording Service</div>
   </div>
 </footer>
+
+<div class="image-modal" id="imageModal">
+  <button class="modal-close" type="button" id="modalClose">×</button>
+  <img src="" alt="" id="modalImage">
+</div>
+
+<script>
+  document.querySelectorAll('.photo-slider').forEach((slider) => {
+    const track = slider.querySelector('.slider-track');
+    const images = slider.querySelectorAll('img');
+    const prevBtn = slider.querySelector('.slider-prev');
+    const nextBtn = slider.querySelector('.slider-next');
+
+    let currentIndex = 0;
+
+    function updateSlider() {
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    prevBtn.addEventListener('click', (event) => {
+      event.stopPropagation();
+      currentIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1;
+      updateSlider();
+    });
+
+    nextBtn.addEventListener('click', (event) => {
+      event.stopPropagation();
+      currentIndex = currentIndex === images.length - 1 ? 0 : currentIndex + 1;
+      updateSlider();
+    });
+
+    images.forEach((img) => {
+      img.addEventListener('click', () => {
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+
+        modalImage.src = img.src;
+        modalImage.alt = img.alt;
+        modal.classList.add('is-open');
+      });
+    });
+  });
+
+  const modal = document.getElementById('imageModal');
+  const modalClose = document.getElementById('modalClose');
+
+  modalClose.addEventListener('click', () => {
+    modal.classList.remove('is-open');
+  });
+
+  modal.addEventListener('click', (event) => {
+    if (event.target === modal) {
+      modal.classList.remove('is-open');
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      modal.classList.remove('is-open');
+    }
+  });
+</script>
 
 </body>
 </html>
