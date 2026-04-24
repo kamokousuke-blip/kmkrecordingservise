@@ -58,6 +58,8 @@ nav{position:sticky;top:0;z-index:100;background:rgba(247,245,240,0.92);backdrop
 .hero-img-box p{font-family:var(--mono);font-size:11px;color:var(--ink-light);letter-spacing:.05em}
 .hero-meta{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
 .meta-card{background:var(--paper-card);border:1px solid var(--border);border-radius:3px;padding:1rem 1.25rem}
+.meta-map-link{display:block;text-decoration:none;color:inherit;cursor:pointer;transition:transform .2s, border-color .2s, background .2s;}
+.meta-map-link:hover{transform:translateY(-2px);border-color:var(--accent-warm);background:#fff;}
 .meta-label{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-light);margin-bottom:.35rem}
 .meta-val{font-size:13px;color:var(--ink);font-weight:500}
 .hero-img-box{overflow:hidden;}
@@ -277,7 +279,6 @@ footer{background:var(--paper-warm)}
       <div class="hero-actions">
         <a href="#contact" class="btn-primary">
           お問い合わせ
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
         <a href="#featured" class="btn-secondary">実績を見る</a>
       </div>
@@ -286,14 +287,15 @@ footer{background:var(--paper-warm)}
         <div class="hero-img-box">
            <img src="studio_pct1_Control Room.jpg" alt="KMK Recording Serviceのメインビジュアル">
         </div>
-      <div class="hero-meta">
-        <div class="meta-card">
-          <div class="meta-label">拠点</div>
-          <div class="meta-val">中ノ峠ミュージック・ラボ<br><span style="font-size:11px;color:var(--ink-light)">石川県小松市</span></div>
-        </div>
-        <div class="meta-card">
+     <div class="hero-meta">
+  <a href="https://www.google.com/maps/search/?api=1&query=中ノ峠ミュージック・ラボ%20石川県小松市中ノ峠町ヌ125"target="_blank"rel="noopener noreferrer"class="meta-card meta-map-link">
+    <div class="meta-label">拠点</div>
+    <div class="meta-val">中ノ峠ミュージック・ラボ<br><span style="font-size:11px;color:var(--ink-light)">石川県小松市中ノ峠町ヌ125</span></div>
+  </a>
+
+  <div class="meta-card">
           <div class="meta-label">主な分野</div>
-          <div class="meta-val">Band Recording<br><span style="font-size:11px;color:var(--ink-light)">Mixing / PA / MA</span></div>
+          <div class="meta-val">・Recording<br>・Mixing、Mastering<br>・PA<br>・MA</div>
         </div>
       </div>
     </div>
