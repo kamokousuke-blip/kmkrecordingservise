@@ -222,6 +222,10 @@ section{padding:clamp(3rem,8vw,6rem) clamp(1.5rem,5vw,4rem)}
 .contact-block-items li::before{content:'·';color:var(--ink-light)}
 .template-box{background:var(--accent);color:#f0ede5;border-radius:3px;padding:1.5rem;font-family:var(--mono);font-size:12px;line-height:1.9;margin-top:1rem}
 .template-box .t-section{margin-top:.75rem;color:var(--accent-warm);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+.copy-email{border:none;background:none;padding:0;font-family:inherit;cursor:pointer;text-align:left;}
+.copy-status{margin-left:.5rem;font-size:11px;color:var(--ink-light);font-family:var(--mono);}
+.copy-email.copied .copy-status{color:var(--accent-warm);}
+
 
 /* FOOTER */
 footer{border-top:1px solid var(--border);padding:2.5rem clamp(1.5rem,5vw,4rem)}
@@ -295,7 +299,7 @@ footer{background:var(--paper-warm)}
 
   <div class="meta-card">
           <div class="meta-label">主な分野</div>
-          <div class="meta-val">・Recording<br>・Mixing、Mastering<br>・PA<br>・MA</div>
+          <div class="meta-val">・Recording<br>・Mixing、Mastering<br>・PA<br>・MA<br>・Location Sound</div>
         </div>
       </div>
     </div>
@@ -634,10 +638,11 @@ footer{background:var(--paper-warm)}
         <div class="contact-card">
           <div class="contact-title">連絡先</div>
           <div class="contact-links">
-            <a href="mailto:kamo.kousuke@gmail.com" class="contact-link">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
-              kamo.kousuke@gmail.com
-            </a>
+            <button type="button" class="contact-link copy-email" data-email="kamo.kousuke@gmail.com">
+             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
+             <span>kamo.kousuke@gmail.com</span>
+             <span class="copy-status">コピー</span>
+              </button>
             <a href="https://x.com/kamo_kousuke" target="_blank" class="contact-link">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4l16 16M4 20L20 4"/></svg>
               X: @kamo_kousuke
@@ -836,6 +841,27 @@ footer{background:var(--paper-warm)}
       showNextModalImage();
     }
   });
+
+  document.querySelectorAll('.copy-email').forEach((button) => {
+  const email = button.dataset.email;
+  const status = button.querySelector('.copy-status');
+  const defaultText = status.textContent;
+
+  button.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(email);
+      status.textContent = 'コピーしました';
+      button.classList.add('copied');
+
+      setTimeout(() => {
+        status.textContent = defaultText;
+        button.classList.remove('copied');
+      }, 1800);
+    } catch (error) {
+      status.textContent = email;
+    }
+  });
+});
 </script>
 
 </body>
